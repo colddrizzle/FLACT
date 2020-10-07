@@ -1,6 +1,6 @@
 """
 run test:
-cd FLAAT
+cd FLACT
 python -m test.test
 
 or in VsCode, Run config TestAll
