@@ -77,9 +77,9 @@ def algo_6_4(G):
                 (p.right[0][0] in set(G.T) and set(p.right[0][1:]) < set(G.V)):
                 P1.add(p)
         else:
-            opt = []
-            for t in p.right[0]:
-                if t in G.T:
+            opt = [p.right[0][0]]
+            for t in p.right[0][1:]:
+                if isTerminal(t) and t[1:-1] in G.T:
                     v = t[1:-1].upper()
                     opt.append(v)
                     P1.add(Production([v], [[t]]))

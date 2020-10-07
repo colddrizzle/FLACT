@@ -9,9 +9,25 @@ from FLAAT.ch6.algo_6_3 import algo_6_3
 
 def algo_4_2(G):
     """
-    >>> 
-    >>> 
-    
+    教程中的语法G中的id是个奇怪的东西，既不是我们这里的终结符也不是语法变量
+    而是终结符变量一样的东西，这里我们把其当做一个字面量来处理。也就是终结符变量
+    不再是变量，而是具体的一个字面量。
+
+    我们的BNF范式不支持终结符变量这种东西，终结符变量都是语法变量，具体参考BNFParser注释。
+
+    >>> G = parse_grammar("test/CPAT/algo_4_2.txt")
+    >>> F = algo_4_2(G)
+    >>> F['E'] == F['T']
+    True
+    >>> F['T'] == F['F']
+    True
+    >>> F['E'] == set(['(', 'i'])
+    True
+
+    >>> F['E1'] == set(['+', u'\u03b5'])
+    True
+    >>> F['T1'] == set(['*', u'\u03b5'])
+    True
     """
 
     UV = algo_6_3(G.P)
@@ -24,9 +40,7 @@ def algo_4_2(G):
     FIRST = {}
     # 初始化各个First
     for X in G.V:
-        if X in FIRST:
-            pass
-        else:
+        if X not in FIRST:
             FIRST[X] = set()
 
     #迭代直到各First不再发生变化

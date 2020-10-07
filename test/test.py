@@ -15,13 +15,18 @@ MODULES = [
 'common.BNFParser',
 'common.production',
 
-# charpter 6        
+# FLAAT charpter 6        
 'FLAAT.ch6.algo_6_1',
 'FLAAT.ch6.algo_6_2',
 'FLAAT.ch6.algo_6_3',
 'FLAAT.ch6.algo_6_3_1',
 'FLAAT.ch6.algo_6_3_2',
-'FLAAT.ch6.algo_6_4'
+'FLAAT.ch6.algo_6_4',
+
+# CPAT charpter 4
+'CPAT.ch4.algo_4_2',
+'CPAT.ch4.algo_4_3',
+'CPAT.ch4.algo_4_4'
 ]
 
 def test_all(mod_list):

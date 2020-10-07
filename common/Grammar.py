@@ -3,7 +3,7 @@ class Grammar(object):
         self._V = set(V) 
         self._T = set(T)
         self._P = P 
-        self._S = set(S) 
+        self._S = S
 
     @property
     def V(self):

@@ -57,4 +57,4 @@ def algo_6_2(G):
             set(p.right[0]) <= (new_v | new_t):
             new_p.append(p)
 
-    return Grammar(new_v, new_t, new_p, G.S & new_v)
+    return Grammar(new_v, new_t, new_p, G.S)

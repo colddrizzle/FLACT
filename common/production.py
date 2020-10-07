@@ -3,6 +3,7 @@ import hashlib
 import BNFParser
 
 EMPTY_SYMBOL = 'ε'
+EMPTY_SYMBOL_UNI = u'\u03b5'
 
 class Production(object):
     def __init__(self, left, right):
@@ -51,18 +52,20 @@ class Production(object):
                     r.append(t)
         return r
 
+    # 返回的终结符不带有引号
+    # 因为带引号会面临单双引号的判断问题
     def right_terminals(self, T = []):
         """
-        >>> p = Production(['A'], [['Ab', '\\"c\\"', 'D'], ['\\"a\\"', 'B', 'CD']])
+        >>> p = Production(['A'], [['Ab', '\\"c\\"', 'D'], ['\\"a\\"', 'B', 'CD'], ['\\"def\\"']])
         >>> r = p.right_terminals()
-        >>> r == ['\\"c\\"', '\\"a\\"']
+        >>> r == ['c', 'a', 'd', 'e', 'f']
         True
         """
         r = []
         for opt in self._right:
             for t in opt:
-                if BNFParser.isTerminal(t, T):
-                    r.append(t)
+                if BNFParser.isLiteralValue(t, T):
+                    r.extend(list(t[1:-1]))
         return r
 
     def first_symbols(self):
@@ -108,7 +111,10 @@ class Production(object):
         True
         """
         if len(p.right)==1 and len(p.right[0])==1:
-            if p.right[0][0] == "'"+EMPTY_SYMBOL+"'" or  p.right[0][0] == '"'+EMPTY_SYMBOL+'"':
+            s = p.right[0][0][1:-1]
+            if not isinstance(s, unicode):
+                s = s.decode('utf-8')
+            if s == EMPTY_SYMBOL_UNI:
                 return True
         return False 
 

@@ -12,9 +12,13 @@
 # 小写希腊字母表示句型（句型可能全是语法变量，也可能全是终结符）
 
 # 所有的字面量都用单引号括起来
+# 字面量的引号仅仅是解析输入的时候区分语法变量
+# 解析完毕后可以略去引号
 
 # 终结符是只含有一个字符的字面量
 
+# 我们的BNF不支持终结符变量 所有的终结符变量看做是语法变量
+# 比如表示所有a-zA-Z的字母的终结符变量 letter，应该写作Letter
 
 from production import Production
 from Grammar import Grammar
@@ -78,10 +82,10 @@ def isLiteralValue(symbol, T=[]):
     >>> isLiteralValue("abc")
     False
 
-    >>> isLiteralValue("\\'abc\\'", ["\\'a\\'","\\'b\\'","\\'c\\'"])
+    >>> isLiteralValue("\\'abc\\'", ["a", "b", "c"])
     True
 
-    >>> isLiteralValue("\\'abc\\'", ["\\'a\\'","\\'b\\'"])
+    >>> isLiteralValue("\\'abc\\'", ["a", "b"])
     False
 
     >>> isLiteralValue('0')
@@ -94,8 +98,7 @@ def isLiteralValue(symbol, T=[]):
         return False
     if symbol[0] == "'" or symbol[0]=='"':
         if T:
-            sT = set([x[1:-1] for x in T])
-            if set(list(symbol[1:-1])) <= sT:
+            if set(list(symbol[1:-1])) <= set(T):
                 return True
             else:
                 return False
@@ -172,6 +175,7 @@ def parse_file(filepath):
     productions = []
     with open(filepath, "r") as fin:
         for line in fin:
+            line = line.decode("utf-8")
             if line:
                 productions.append(parse(line))
     return productions
@@ -180,14 +184,15 @@ def parse_grammar(filepath):
     P = []
     V = set()
     T = set()
-    S = set()
+    S = None
     with open(filepath, "r") as fin:
         for line in fin:
+            line = line.decode("utf-8")
             if line:
                 p = parse(line)
                 V |= set(p.right_variables())
                 T |= set(p.right_terminals())
                 if not S:
-                    S |= set(p.left)
+                    S = p.left[0]
                 P.append(p)
     return Grammar(V, T, P, S)

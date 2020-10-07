@@ -12,11 +12,11 @@ def isPTSF(p, T=[]):
     True
 
     >>> p = Production(['A'], [['\\"a\\"', '\\"b\\"'],['\\"cde\\"']])
-    >>> isPTSF(p, ['\\"a\\"','\\"b\\"','\\"c\\"','\\"d\\"','\\"e\\"'])
+    >>> isPTSF(p, ['a', 'b', 'c', 'd', 'e'])
     True
 
     >>> p = Production(['A'], [['\\"a\\"', '\\"b\\"'],['\\"cde\\"']])
-    >>> isPTSF(p, ['\\"a\\"'])
+    >>> isPTSF(p, ['a'])
     False
 
     >>> p = Production(['A'], [['a', 'b'],['Ade']])
@@ -40,11 +40,11 @@ def algo_6_1(G):
     >>> p1 = Production(['S'], [['A', 'B'],['\\"a\\"'],['B','B']])
     >>> p2 = Production(['A'], [['\\"a\\"']])
     >>> p3 = Production(['C'], [['\\"b\\"'], ['A', 'B', '\\"a\\"']])
-    >>> g = Grammar(['S', 'A', 'B', 'C'], ['\\"a\\"', '\\"b\\"'], [p1,p2,p3], ['S'])
+    >>> g = Grammar(['S', 'A', 'B', 'C'], ['a', 'b'], [p1,p2,p3], ['S'])
     >>> _g = algo_6_1(g)
     >>> _g.V == set(['S', 'A', 'C'])
     True
-    >>> _g.T == set(['\\"a\\"', '\\"b\\"'])
+    >>> _g.T == set(['a', 'b'])
     True
     """
     simple_plist = []
