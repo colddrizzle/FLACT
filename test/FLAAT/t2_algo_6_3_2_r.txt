@@ -1,0 +1,5 @@
+S -> 'e' E | 'f' | 'b' B | 'c' C 
+A -> 'e' E | 'f' | 'b' B | 'c' C 
+D -> 'e' E | 'f' | 'b' B | 'c' C 
+E -> 'e'
+F -> 'f'

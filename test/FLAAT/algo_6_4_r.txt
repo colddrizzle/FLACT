@@ -1,0 +1,9 @@
+A1 -> 'b' B A3 C A3 C A3 B A3 | 'a' A1 C A3 C A3 B A3 | 'b' B B C A3 B A3 | 'a' C A3 B A3 | 'b' B A3 C A3 B1 C A3 B A3
+A1 -> 'a' A1 C A3 B1 C A3 B A3 | 'b' B B B1 C A3 B A3 | 'a' B1 C A3 B A3 | 'b' B A3 | 'a' A1
+A2 -> 'b' B A3 C A3 C A3 | 'a' A1 C A3 C A3 | 'b' B B C A3 | 'a' C A3 | 'b' B A3 C A3 B1 C A3| 'a' A1 C A3 B1 C A3
+A2 -> 'b' B B B1 C A3 | 'a' B1 C A3 | 'b'
+A3 -> 'b' B A3 C A3 | 'a' A1 C A3 | 'b' B B | 'a' 
+A3 -> 'b' B A3 C A3 B1 | 'a' A1 C A3 B1 | 'b' B B B1 | 'a' B1
+B1 -> 'c' A3 B A3 C A3 | 'c' A3 B B | 'c' A3 B A3 C A3 B1 | 'c' A3 B B B1
+B -> 'b' 
+C -> 'c' 

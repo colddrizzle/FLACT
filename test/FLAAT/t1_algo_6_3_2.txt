@@ -1,0 +1,6 @@
+E -> E '+' T | E '-' T | T
+T -> T '*' F | T '/' F | F
+F -> F '^' P | P
+P -> '(' E ')' | N '(' L ')' | 'id'
+N -> 'sin' | 'cos' | 'exp' | 'abs' | 'log' | 'int'
+L -> L ',' E | E
